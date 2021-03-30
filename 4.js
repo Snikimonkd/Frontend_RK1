@@ -1,7 +1,28 @@
-//http://rubaxa.github.io/playground/#parallel
 // Параллельные вычисления
 
-function parallel() {
+function parallel(args, callback) {
+    let i = 0;
+    let n = 0;
+    let result = [];
+    
+    for (let v of args){
+        const counter = i++;
+        const a = v( input => {
+            result[counter] = input;
+            n++;
+            if(n === args.length){
+                callback(result);
+            }
+        });
+        
+        if (typeof a === "number") {
+            result[counter] = a;
+            n++;
+            if(n === args.length){
+                callback(result);
+            }
+        }
+    }
 }
 
 
